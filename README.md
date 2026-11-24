@@ -115,3 +115,23 @@ Cada equipo reporta:
 - Mutation score final.
 - Qué mutantes quedaron y por qué.
 - Cuál propiedad fue la más valiosa.
+
+### Resultados de la fase D
+
+La suite de referencia detectó 11 de 30 mutantes (36,67 %). Con las seis propiedades de la fase C detectó **28 de 30 (93,33 %)** y superó la meta del taller. 
+
+| Propiedad añadida, en orden de ejecución | Mutantes detectados | Mutation score acumulado |
+|---|---:|---:|
+| Cotas de cero y precio con IVA | 14/30 | 46,67 % |
+| Tope del 20 % y total al alcanzarlo | 24/30 | 80,00 % |
+| Efecto del cupón | 26/30 | 86,67 % |
+| Descuento estricto para cliente frecuente | 27/30 | 90,00 % |
+| Tipo de excepción para subtotales negativos | 27/30 | 90,00 % |
+| Reducción del total al cruzar el umbral de ₡100 000 | 28/30 | 93,33 % |
+
+La propiedad del **tope del 20 %** aportó más en este orden de ejecución. Detectó diez mutantes adicionales al comprobar tanto el total mínimo permitido como el valor exacto que se paga cuando el monto alto y el cupón alcanzan el tope.
+
+Sobrevivieron dos mutantes en `src/pedido.js`.
+
+- **Mensaje de error vacío.** Para un subtotal negativo se sigue lanzando `RangeError`. Las reglas del taller especifican el tipo de excepción y dejan libre el texto del mensaje.
+- **Comparación inclusiva en el tope.** Cambiar `>` por `>=` hace que, al llegar exactamente al 20 %, se vuelva a asignar ese mismo 20 %. El total es idéntico para todos los pedidos, por lo que el mutante es equivalente.
